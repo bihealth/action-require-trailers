@@ -1,0 +1,24 @@
+{
+  "name": "action-require-trailers",
+  "version": "1.0.0",
+  "description": "Enforces that each commit message has required trailers. Also see [varfish-server#323](https://github.com/bihealth/varfish-server/issues/323)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bihealth/action-require-trailers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bihealth/action-require-trailers/issues"
+  },
+  "homepage": "https://github.com/bihealth/action-require-trailers#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0"
+  }
+}
