@@ -1,0 +1,13 @@
+name: check trailers
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  check_trailers:
+    runs-on: ubuntu-latest
+    name: Check commit message trailers
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bihealth/action-require-trailers@test-pr
