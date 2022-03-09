@@ -6,6 +6,9 @@ const RE_ISSUE = /^#\d+$/
 const IMPACTS = ["none", "require-revalidation"]
 
 try {
+  const payload = JSON.stringify(github.context.payload, undefined, 2)
+  core.warning(`The event payload: ${payload}`);
+
   let allGood = true
   let seenRelatedIssue = false
   let seenProjectedImpact = false
