@@ -2,6 +2,7 @@ name: check trailers
 
 on:
   - push
+  - pull_request
 
 jobs:
   check_trailers:
