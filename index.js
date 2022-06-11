@@ -7,11 +7,18 @@ const RE_ISSUE = /^#\d+$/
 const IMPACTS = ["none", "require-revalidation"]
 
 function processCommits (commits) {
-  let allGood = true
-  let seenRelatedIssue = false
-  let seenProjectedImpact = false
-
   for (const commit of commits) {
+    let allGood = true
+    let seenRelatedIssue = false
+    let seenProjectedImpact = false
+
+    // Skip if commit author is dependabot
+    const author = commit.author || commit.commit.author
+    const authors = JSON.stringify(author)
+    core.error(`author == ${authors}`)
+    if (author.id === 49699333) {
+        continue
+    }
     const msg = commit.message || commit.commit.message
     const lines = msg.match(/[^\r\n]+/g)
     // Iterate commit message lines in reverse order
@@ -52,19 +59,19 @@ function processCommits (commits) {
         break  // first non-trailer line
       }
     }
-  }
-  console.log(`all good? ${allGood}`)
-  console.log(`seen Related-Issue|No-Related-Issue: ${seenRelatedIssue}`)
-  console.log(`seen Projected-Results-Impact: ${seenProjectedImpact}`)
+    console.log(`all good? ${allGood}`)
+    console.log(`seen Related-Issue|No-Related-Issue: ${seenRelatedIssue}`)
+    console.log(`seen Projected-Results-Impact: ${seenProjectedImpact}`)
 
-  if (!seenRelatedIssue) {
-    core.error(`Missing (No-)Related-Issue trailer!`)
-  }
-  if (!seenProjectedImpact) {
-    core.error(`Missing Project-Results-Impact trailer!`)
-  }
-  if (!allGood || !seenRelatedIssue || !seenProjectedImpact) {
-    core.setFailed("trailer check failed")
+    if (!seenRelatedIssue) {
+      core.error(`Missing (No-)Related-Issue trailer!`)
+    }
+    if (!seenProjectedImpact) {
+      core.error(`Missing Project-Results-Impact trailer!`)
+    }
+    if (!allGood || !seenRelatedIssue || !seenProjectedImpact) {
+      core.setFailed("trailer check failed")
+    }
   }
 }
 
