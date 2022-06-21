@@ -67,7 +67,7 @@ function processCommits (commits) {
       core.error(`Missing (No-)Related-Issue trailer!`)
     }
     if (!seenProjectedImpact) {
-      core.error(`Missing Project-Results-Impact trailer!`)
+      core.error(`Missing Projected-Results-Impact trailer!`)
     }
     if (!allGood || !seenRelatedIssue || !seenProjectedImpact) {
       core.setFailed("trailer check failed")
